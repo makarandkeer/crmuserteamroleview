@@ -51,28 +51,28 @@
   </ItemGroup>
   <ItemGroup>
     <CRMWebResource Include="WebResources\PNG format\Refresh_16x16.png">
-      <DisplayName>Refresh_16x16</DisplayName>
-      <UniqueName>mkisv_/Refresh_16x16</UniqueName>
+      <DisplayName>Refresh_16x16.png</DisplayName>
+      <UniqueName>mkisv_/Refresh_16x16.png</UniqueName>
       <WebResourceType>PNG</WebResourceType>
     </CRMWebResource>
     <CRMWebResource Include="WebResources\Script %28JScript%29\jquery_1.6.3.js">
-      <DisplayName>jquery_1.6.3</DisplayName>
-      <UniqueName>mkisv_/jquery_1.6.3</UniqueName>
+      <DisplayName>jquery_1.6.3.js</DisplayName>
+      <UniqueName>mkisv_/jquery_1.6.3.js</UniqueName>
       <WebResourceType>Script</WebResourceType>
     </CRMWebResource>
     <CRMWebResource Include="WebResources\Script %28JScript%29\jquery_1.6.4.min.js">
-      <DisplayName>jquery_1.6.4.min</DisplayName>
-      <UniqueName>mkisv_/jquery_1.6.4.min</UniqueName>
+      <DisplayName>jquery_1.6.4.min.js</DisplayName>
+      <UniqueName>mkisv_/jquery_1.6.4.min.js</UniqueName>
       <WebResourceType>Script</WebResourceType>
     </CRMWebResource>
     <CRMWebResource Include="WebResources\Script %28JScript%29\SystemUserTeamRoles.js">
-      <DisplayName>SystemUserTeamRoles</DisplayName>
-      <UniqueName>mkisv_/SystemUserTeamRoles</UniqueName>
+      <DisplayName>SystemUserTeamRoles.js</DisplayName>
+      <UniqueName>mkisv_/SystemUserTeamRoles.js</UniqueName>
       <WebResourceType>Script</WebResourceType>
     </CRMWebResource>
     <CRMWebResource Include="WebResources\Web Page %28HTML%29\SystemUserTeamRoles.htm">
-      <DisplayName>SystemUserTeamRoles</DisplayName>
-      <UniqueName>mkisv_/SystemUserTeamRoles</UniqueName>
+      <DisplayName>SystemUserTeamRoles.htm</DisplayName>
+      <UniqueName>mkisv_/SystemUserTeamRoles.htm</UniqueName>
       <WebResourceType>WebPage</WebResourceType>
     </CRMWebResource>
   </ItemGroup>

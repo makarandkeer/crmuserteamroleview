@@ -1,0 +1,210 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+	<head>
+		<title></title>
+         <style type="text/css">
+        *
+        {
+            padding: 0px;
+            margin: 0px;
+            border-width: 0px;
+        }
+        body
+        {
+            background-color: #F6F8FA;
+            font-size: 12px;
+            font-family: Segoe UI;
+            color: #3B3B3B;
+            margin-left:5px;
+            margin-top:5px;
+        }
+        table
+        {
+            background-color: White;
+            font-size: 12px;
+            font-family: Segoe UI;
+            color: #3B3B3B;
+            vertical-align: top;
+            border-collapse: collapse;
+            border-color: #A5ACB5;
+            border-width: 1pt;
+            border-style: solid;
+            width:auto;
+            height:auto;
+        }
+        td
+        {
+            background-color: White;
+            font-size: 12px;
+            font-family: Segoe UI;
+            color: Black;
+            vertical-align: top;
+            border-color: #A5ACB5;
+            border-width: 1pt;
+            border-style: solid;
+            padding: 5px;
+        }
+        th
+        {
+            background-color: #EFF2F6;
+            font-size: 12px;
+            font-family: Segoe UI;
+            font-weight: 600;
+            color: #3B3B3B;
+            vertical-align: top;
+            border-color: #A5ACB5;
+            border-width: 1pt;
+            border-style: solid;
+            height: 20px;
+            padding: 5px;
+            text-align: left;
+        }
+        p
+        {
+            margin-bottom: 10px;
+        }
+        ol
+        {
+            margin-left: 35px;
+        }
+        li
+        {
+            padding: 0 0 10px 0px;
+        }
+        .headerCss
+        {
+            background-color: #EFF2F6; font-size: 12px; font-family: Segoe UI; font-weight:600; color: #3B3B3B; 
+            vertical-align:top; border-color:#A5ACB5; border-width:1pt; border-style:solid; height:20px; padding:5px; text-align:left;
+            width:30%;
+        }
+        .seperator
+        {
+            background-color: White;
+            font-size: 12px;
+            font-family: Segoe UI;
+            color: Black;
+            vertical-align: top;
+            border-color: #A5ACB5;
+            border-width: 0px;
+            border-style: solid;
+            padding: 5px;
+            width:5%;
+        }
+        .error
+        {
+            color:Red;
+            font-weight:bold;
+        }
+    </style>
+        <script src="SystemUserTeamRoles.js"></script>
+        <script src="jquery_1.6.3.js"></script>
+        <script type="text/javascript" src="../ClientGlobalContext.js.aspx"></script>
+        <script language="javascript" type="text/javascript">
+            function ShowTeamRoles() {
+
+                var divTag = document.getElementById('TeamRoleDIV');
+                divTag.innerHTML = '';
+
+                if (this.parent.Xrm.Page.data.entity.getId() != null) {
+
+                    var userId = this.parent.Xrm.Page.data.entity.getId();
+
+//                    alert(userId);
+                    successCallback = function (responseText) {
+//                        alert(responseText);
+
+                        var xmlDoc = $.parseXML(responseText);
+                        $xml = $(xmlDoc);
+
+                        var oTable = document.createElement("table");
+
+                        var oThead = document.createElement("thead");
+                        var oTr1 = document.createElement("tr");
+
+                        var oTh = document.createElement("th");
+                        oTh.innerText = "Team";
+                        oTr1.appendChild(oTh);
+
+                        var oTh2 = document.createElement("th");
+                        oTh2.innerText = "Team Business Unit";
+                        oTr1.appendChild(oTh2);
+
+                        var oTh3 = document.createElement("th");
+                        oTh3.innerText = "Role";
+                        oTr1.appendChild(oTh3);
+
+                        oThead.appendChild(oTr1);
+
+                        var oTbody = document.createElement("tbody");
+
+                        $xml.find('a\\:Entity, Entity').each(function () {
+
+                            var role = $(this).find('a\\:KeyValuePairOfstringanyType, KeyValuePairOfstringanyType').filter(function () {
+
+                                return $(this).find("b\\:key, key").text() === "Role.name";
+                            });
+
+                            var roleName = $(role).find('a\\:Value, Value').text();
+
+//                            alert(roleName);
+
+                            var team = $(this).find('a\\:KeyValuePairOfstringanyType, KeyValuePairOfstringanyType').filter(function () {
+
+                                return $(this).find("b\\:key, key").text() === "Team.name";
+                            });
+
+                            var teamName = $(team).find('a\\:Value, Value').text();
+
+                            //Team.businessunitid
+                            var bu = $(this).find('a\\:KeyValuePairOfstringanyType, KeyValuePairOfstringanyType').filter(function () {
+
+                                return $(this).find("b\\:key, key").text() === "Team.businessunitid";
+                            });
+
+                            //a:Name
+                            var buName = $(bu).find('a\\:Name, Name').text();
+
+//                            alert(teamName + " --- " + buName + " -- " + roleName);
+
+                            var oTr2 = document.createElement("tr");
+
+                            var oTd1 = document.createElement("td");
+                            oTd1.innerText = teamName;
+                            oTr2.appendChild(oTd1);
+
+                            var oTd2 = document.createElement("td");
+                            oTd2.innerText = buName;
+                            oTr2.appendChild(oTd2);
+
+                            var oTd3 = document.createElement("td");
+                            oTd3.innerText = roleName;
+                            oTr2.appendChild(oTd3);
+
+                            oTbody.appendChild(oTr2);
+
+
+                        });
+
+                        oTable.appendChild(oThead);
+                        oTable.appendChild(oTbody);
+
+                        divTag.appendChild(oTable);
+                        divTag.style.display = "block";
+
+                    };
+
+                    errorCallback = function (errorMessage) {
+                        alert(errorMessage);
+                    };
+
+                    this.parent.SDK.ISV.GetSysUserTeamRolesRequest(userId, successCallback, errorCallback);
+                }
+            }
+        </script>
+	</head>
+	<body onload="ShowTeamRoles();">
+        <img src="Refresh_16x16.png" title="Refresh" style="margin-bottom:5px;" onclick="ShowTeamRoles();" />
+	    <div id="TeamRoleDIV" name="TeamRoleDIV" style="display:none">
+    </div>
+	</body>
+</html>
